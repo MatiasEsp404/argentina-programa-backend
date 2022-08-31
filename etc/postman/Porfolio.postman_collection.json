@@ -35,9 +35,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/auth/login",
+							"raw": "https://argentina-programa-grupo-144.herokuapp.com/api/auth/login",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"argentina-programa-grupo-144",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
@@ -65,7 +68,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"unity.matias@outlook.com\",\r\n    \"password\": \"BackendDevelop\"\r\n}",
+							"raw": "{\r\n    \"email\": \"foo@outlook.com\",\r\n    \"password\": \"BackendDevelop\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -73,9 +76,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/user",
+							"raw": "https://argentina-programa-grupo-144.herokuapp.com/api/user",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"argentina-programa-grupo-144",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
@@ -99,9 +105,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/api/information",
+							"raw": "https://argentina-programa-grupo-144.herokuapp.com/api/information",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"argentina-programa-grupo-144",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
@@ -128,7 +137,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Matias\",\r\n    \"lastName\": \"Espinola\",\r\n    \"email\": \"unity.matias@outlook.com\",\r\n    \"linkedin\": \"www.linkedin.com/in/matiasesp404/\",\r\n    \"gitHub\": \"www.github.com/MatiasEsp404\",\r\n    \"country\": \"Argentina\",\r\n    \"province\": \"Buenos Aires\",\r\n    \"location\": \"Almirante Brown\",\r\n    \"phoneNumber\": \"5491162158673\"\r\n}",
+							"raw": "{\r\n    \"firstName\": \"Matias\",\r\n    \"lastName\": \"Espinola\",\r\n    \"email\": \"unity.matias@outlook.com\",\r\n    \"linkedin\": \"www.linkedin.com/in/matiasesp404/\",\r\n    \"gitHub\": \"www.github.com/MatiasEsp404\",\r\n    \"country\": \"Argentina\",\r\n    \"province\": \"Buenos Aires\",\r\n    \"location\": \"Almirante Brown\",\r\n    \"phoneNumber\": \"5491162158673\",\r\n    \"seniority\": \"Java Backend Developer Jr\",\r\n   \"profilePicture\": \"https://media-exp1.licdn.com/dms/image/C4D03AQHX8KoFv_0qeg/profile-displayphoto-shrink_800_800/0/1658791940443?e=1666828800&v=beta&t=tIB9GyhT7efmcGTr6IhlXhxZOI9jtysZHA6h0FRFBfE\",\r\n    \"coverImage\": \"https://media-exp1.licdn.com/dms/image/C4D16AQGYmEHkYSst3Q/profile-displaybackgroundimage-shrink_350_1400/0/1661114015065?e=1666828800&v=beta&t=eOdJHuweJAl_tM_wNhmguRE2tmy9kzskhnR_UVd3FoY\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -136,9 +145,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/information",
+							"raw": "https://argentina-programa-grupo-144.herokuapp.com/api/information",
+							"protocol": "https",
 							"host": [
-								"{{url}}"
+								"argentina-programa-grupo-144",
+								"herokuapp",
+								"com"
 							],
 							"path": [
 								"api",
