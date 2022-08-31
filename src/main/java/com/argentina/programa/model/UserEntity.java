@@ -22,7 +22,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Getter
 @Setter
 @Entity
-@Table(name = "USER")
+@Table(name = "OWNER")
 public class UserEntity implements UserDetails {
 
   @Id
