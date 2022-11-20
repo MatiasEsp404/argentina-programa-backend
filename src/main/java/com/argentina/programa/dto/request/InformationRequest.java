@@ -1,6 +1,7 @@
 package com.argentina.programa.dto.request;
 
 import com.argentina.programa.util.RegExpressionUtils;
+import java.util.List;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -67,5 +68,9 @@ public class InformationRequest {
 //  @Pattern(regexp = RegExpressionUtils.URL,
 //  message = "The coverImage link has an invalid format.")
   private String coverImage;
+  
+  private List<FormationRequest> formations;
+  
+  private List<ProjectRequest> projects;
 
 }

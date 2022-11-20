@@ -6,46 +6,46 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class InformationUpdater {
+  
+  public InformationEntity patch(InformationEntity entity, InformationRequest request) {
 
-  public InformationEntity patch(InformationEntity original, InformationRequest update) {
-
-    if (update.getFirstName() != null) {
-      original.setFirstName(update.getFirstName());
+    if (request.getFirstName() != null) {
+      entity.setFirstName(request.getFirstName());
     }
-    if (update.getLastName() != null) {
-      original.setLastName(update.getLastName());
+    if (request.getLastName() != null) {
+      entity.setLastName(request.getLastName());
     }
-    if (update.getEmail() != null) {
-      original.setEmail(update.getEmail());
+    if (request.getEmail() != null) {
+      entity.setEmail(request.getEmail());
     }
-    if (update.getPhoneNumber() != null) {
-      original.setPhoneNumber(update.getPhoneNumber());
+    if (request.getPhoneNumber() != null) {
+      entity.setPhoneNumber(request.getPhoneNumber());
     }
-    if (update.getCountry() != null) {
-      original.setCountry(update.getCountry());
+    if (request.getCountry() != null) {
+      entity.setCountry(request.getCountry());
     }
-    if (update.getProvince() != null) {
-      original.setProvince(update.getProvince());
+    if (request.getProvince() != null) {
+      entity.setProvince(request.getProvince());
     }
-    if (update.getLocation() != null) {
-      original.setLocation(update.getLocation());
+    if (request.getLocation() != null) {
+      entity.setLocation(request.getLocation());
     }
-    if (update.getLinkedin() != null) {
-      original.setLinkedin(update.getLinkedin());
+    if (request.getLinkedin() != null) {
+      entity.setLinkedin(request.getLinkedin());
     }
-    if (update.getGitHub() != null) {
-      original.setGitHub(update.getGitHub());
+    if (request.getGitHub() != null) {
+      entity.setGitHub(request.getGitHub());
     }
-    if (update.getSeniority()!=null){
-      original.setSeniority(update.getSeniority());
+    if (request.getSeniority()!=null){
+      entity.setSeniority(request.getSeniority());
     }
-    if (update.getCoverImage()!=null){
-      original.setCoverImage(update.getCoverImage());
+    if (request.getCoverImage()!=null){
+      entity.setCoverImage(request.getCoverImage());
     }
-    if (update.getProfilePicture()!=null){
-      original.setProfilePicture(update.getProfilePicture());
+    if (request.getProfilePicture()!=null){
+      entity.setProfilePicture(request.getProfilePicture());
     }
-    return original;
+    return entity;
 
   }
 

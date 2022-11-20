@@ -4,6 +4,8 @@ import com.argentina.programa.dto.request.InformationRequest;
 import com.argentina.programa.dto.response.InformationResponse;
 import com.argentina.programa.service.abstraction.IGetInformation;
 import com.argentina.programa.service.abstraction.IPatchInformation;
+import com.argentina.programa.service.abstraction.IUpdateFormation;
+import com.argentina.programa.service.abstraction.IUpdateProject;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -25,6 +27,12 @@ public class InformationController {
 
   @Autowired
   private IPatchInformation patchInformation;
+  
+  @Autowired
+  private IUpdateFormation updateFormation;
+  
+  @Autowired
+  private IUpdateProject updateProject;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   private ResponseEntity<InformationResponse> get() {
@@ -36,6 +44,8 @@ public class InformationController {
       consumes = MediaType.APPLICATION_JSON_VALUE)
   private ResponseEntity<InformationResponse> update(
       @Valid @RequestBody InformationRequest request) {
+    updateFormation.update(request.getFormations());
+    updateProject.update(request.getProjects());
     InformationResponse response = patchInformation.patch(request);
     return ResponseEntity.ok().body(response);
   }

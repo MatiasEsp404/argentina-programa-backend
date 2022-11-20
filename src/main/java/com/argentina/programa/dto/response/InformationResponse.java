@@ -1,5 +1,6 @@
 package com.argentina.programa.dto.response;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,5 +26,7 @@ public class InformationResponse {
   private String seniority;
   private String profilePicture;
   private String coverImage;
+  List<FormationResponse> formations;
+  List<ProjectResponse> projects;
 
 }
