@@ -70,9 +70,9 @@ public class InformationSeeder {
         .linkedin("linkedin.com/in/MatiasEsp404/").gitHub("github.com/MatiasEsp404")
         .seniority("Java Backend Develop Jr")
         .profilePicture(
-            "https://media-exp1.licdn.com/dms/image/C4D03AQHX8KoFv_0qeg/profile-displayphoto-shrink_800_800/0/1658791940443?e=1666828800&v=beta&t=tIB9GyhT7efmcGTr6IhlXhxZOI9jtysZHA6h0FRFBfE")
+            "https://1.bp.blogspot.com/-MKUK2ib5GJ4/UQUyUb4zQ5I/AAAAAAAAAgY/TTMX2jRCp3s/s1600/pikachu+1.jpg")
         .coverImage(
-            "https://media-exp1.licdn.com/dms/image/C4D16AQGYmEHkYSst3Q/profile-displaybackgroundimage-shrink_350_1400/0/1661114015065?e=1666828800&v=beta&t=eOdJHuweJAl_tM_wNhmguRE2tmy9kzskhnR_UVd3FoY")
+            "https://secure.static.tumblr.com/0e3b2e30312ca426d8a8f29a99e01aeb/ge4upkh/HMcmzna1m/tumblr_static_tumblr_static_tumblr_static_pokemon_banner.png")
         .build();
   }
 
