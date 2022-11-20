@@ -1,48 +1,48 @@
 package com.argentina.programa.updater;
 
+import org.springframework.stereotype.Component;
 import com.argentina.programa.dto.request.InformationRequest;
 import com.argentina.programa.model.InformationEntity;
-import org.springframework.stereotype.Component;
 
 @Component
 public class InformationUpdater {
-  
+
   public InformationEntity patch(InformationEntity entity, InformationRequest request) {
 
-    if (request.getFirstName() != null) {
+    if (request.getFirstName() != null && !request.getFirstName().isBlank()) {
       entity.setFirstName(request.getFirstName());
     }
-    if (request.getLastName() != null) {
+    if (request.getLastName() != null && !request.getLastName().isBlank()) {
       entity.setLastName(request.getLastName());
     }
-    if (request.getEmail() != null) {
+    if (request.getEmail() != null && !request.getEmail().isBlank()) {
       entity.setEmail(request.getEmail());
     }
-    if (request.getPhoneNumber() != null) {
+    if (request.getPhoneNumber() != null && !request.getPhoneNumber().isBlank()) {
       entity.setPhoneNumber(request.getPhoneNumber());
     }
-    if (request.getCountry() != null) {
+    if (request.getCountry() != null && !request.getCountry().isBlank()) {
       entity.setCountry(request.getCountry());
     }
-    if (request.getProvince() != null) {
+    if (request.getProvince() != null && !request.getProvince().isBlank()) {
       entity.setProvince(request.getProvince());
     }
-    if (request.getLocation() != null) {
+    if (request.getLocation() != null && !request.getLocation().isBlank()) {
       entity.setLocation(request.getLocation());
     }
-    if (request.getLinkedin() != null) {
+    if (request.getLinkedin() != null && !request.getLinkedin().isBlank()) {
       entity.setLinkedin(request.getLinkedin());
     }
-    if (request.getGitHub() != null) {
+    if (request.getGitHub() != null && !request.getGitHub().isBlank()) {
       entity.setGitHub(request.getGitHub());
     }
-    if (request.getSeniority()!=null){
+    if (request.getSeniority() != null && !request.getSeniority().isBlank()) {
       entity.setSeniority(request.getSeniority());
     }
-    if (request.getCoverImage()!=null){
+    if (request.getCoverImage() != null && !request.getCoverImage().isBlank()) {
       entity.setCoverImage(request.getCoverImage());
     }
-    if (request.getProfilePicture()!=null){
+    if (request.getProfilePicture() != null && !request.getProfilePicture().isBlank()) {
       entity.setProfilePicture(request.getProfilePicture());
     }
     return entity;
