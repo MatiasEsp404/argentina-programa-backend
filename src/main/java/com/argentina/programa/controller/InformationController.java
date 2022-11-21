@@ -44,8 +44,8 @@ public class InformationController {
       consumes = MediaType.APPLICATION_JSON_VALUE)
   private ResponseEntity<InformationResponse> update(
       @Valid @RequestBody InformationRequest request) {
-    updateFormation.update(request.getFormations());
-    updateProject.update(request.getProjects());
+//    updateFormation.update(request.getFormations());
+//    updateProject.update(request.getProjects());
     InformationResponse response = patchInformation.patch(request);
     return ResponseEntity.ok().body(response);
   }
