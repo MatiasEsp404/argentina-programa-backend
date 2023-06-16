@@ -14,4 +14,7 @@ public abstract class Paths {
 	public static final String PAGE = "?page={page:[\\d+]}&size={size:[\\d+]}";
 	public static final String DOCUMENTATION_PATHS = "/api/docs/**";
 
+	public static final String TRABAJO = "/api/trabajo";
+	public static final String HABILIDAD = "/api/habilidad";
+	public static final String ESTUDIO = "/api/estudio";
 }

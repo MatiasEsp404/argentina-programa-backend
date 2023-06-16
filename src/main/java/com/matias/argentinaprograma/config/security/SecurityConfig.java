@@ -74,6 +74,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.DELETE, Paths.USERS + Paths.ID).hasRole(Role.ADMIN.name())
 				.antMatchers(HttpMethod.PATCH, Paths.USERS + Paths.ID).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
 
+				.antMatchers(HttpMethod.GET, Paths.TRABAJO).permitAll()
+				.antMatchers(HttpMethod.GET, Paths.ESTUDIO).permitAll()
+				.antMatchers(HttpMethod.GET, Paths.HABILIDAD).permitAll()
+
 				.anyRequest().authenticated().and()
 				.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class).exceptionHandling()
 				.accessDeniedHandler(accessDeniedHandler()).authenticationEntryPoint(authenticationEntryPoint());
