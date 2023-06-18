@@ -1,5 +1,6 @@
 package com.matias.argentinaprograma.mapper;
 
+import com.matias.argentinaprograma.dto.request.HabilidadRequest;
 import com.matias.argentinaprograma.dto.response.HabilidadResponse;
 import com.matias.argentinaprograma.model.HabilidadEntity;
 import java.util.ArrayList;
@@ -22,6 +23,21 @@ public class HabilidadMapper {
         .id(habilidad.getId())
         .capacidad(habilidad.getCapacidad())
         .nombre(habilidad.getNombre())
+        .build();
+  }
+
+  public List<HabilidadEntity> toHabilidadEntities(List<HabilidadRequest> requests) {
+    List<HabilidadEntity> entities = new ArrayList<>();
+    for(HabilidadRequest request : requests) {
+      entities.add(toHabilidadEntity(request));
+    }
+    return entities;
+  }
+
+  public HabilidadEntity toHabilidadEntity(HabilidadRequest request) {
+    return HabilidadEntity.builder()
+        .nombre(request.getNombre())
+        .capacidad(request.getCapacidad())
         .build();
   }
 

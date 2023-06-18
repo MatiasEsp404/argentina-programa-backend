@@ -5,6 +5,7 @@ import com.matias.argentinaprograma.dto.response.TrabajoResponse;
 import com.matias.argentinaprograma.service.abstraction.ITrabajoService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,9 @@ public class TrabajoController {
   @Autowired
   private ITrabajoService trabajoService;
 
-  @GetMapping
+  @GetMapping(
+      produces = MediaType.APPLICATION_JSON_VALUE
+  )
   public ResponseEntity<List<TrabajoResponse>> getAll() {
     return ResponseEntity.ok(trabajoService.getAll());
   }

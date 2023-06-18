@@ -5,6 +5,7 @@ import com.matias.argentinaprograma.dto.response.EstudioResponse;
 import com.matias.argentinaprograma.service.abstraction.IEstudioService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,9 @@ public class EstudioController {
   @Autowired
   private IEstudioService estudioService;
 
-  @GetMapping
+  @GetMapping(
+      produces = MediaType.APPLICATION_JSON_VALUE
+  )
   public ResponseEntity<List<EstudioResponse>> getAll() {
     return ResponseEntity.ok(estudioService.getAll());
   }

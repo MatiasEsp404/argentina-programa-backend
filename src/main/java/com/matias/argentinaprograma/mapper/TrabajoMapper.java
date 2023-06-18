@@ -1,5 +1,6 @@
 package com.matias.argentinaprograma.mapper;
 
+import com.matias.argentinaprograma.dto.request.TrabajoRequest;
 import com.matias.argentinaprograma.dto.response.TrabajoResponse;
 import com.matias.argentinaprograma.model.TrabajoEntity;
 import java.util.ArrayList;
@@ -24,6 +25,23 @@ public class TrabajoMapper {
         .descripcion(trabajo.getDescripcion())
         .fechaDesde(trabajo.getFechaDesde())
         .fechaHasta(trabajo.getFechaHasta())
+        .build();
+  }
+
+  public List<TrabajoEntity> toTrabajoEntities(List<TrabajoRequest> requests) {
+    List<TrabajoEntity> entities = new ArrayList<>();
+    for (TrabajoRequest request : requests) {
+      entities.add(toTrabajoEntity(request));
+    }
+    return entities;
+  }
+
+  public TrabajoEntity toTrabajoEntity(TrabajoRequest request) {
+    return TrabajoEntity.builder()
+        .titulo(request.getTitulo())
+        .descripcion(request.getDescripcion())
+        .fechaDesde(request.getFechaDesde())
+        .fechaHasta(request.getFechaHasta())
         .build();
   }
 
