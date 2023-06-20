@@ -51,7 +51,7 @@ public class UserEntity implements UserDetails {
 	@Column(nullable = false)
 	private String password;
 
-	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	@JoinColumn(name = "ROLE_ID")
 	private RoleEntity role;
 

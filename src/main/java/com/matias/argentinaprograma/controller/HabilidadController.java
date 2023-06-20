@@ -23,7 +23,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 @CrossOrigin
 @RestController
 @RequestMapping(path = Paths.HABILIDAD)
-public class HabilidadController {
+public class HabilidadController implements Paths {
 
   @Autowired
   private IHabilidadService habilidadService;
@@ -36,7 +36,7 @@ public class HabilidadController {
   }
 
   @GetMapping(
-      path = "/{id}",
+      path = ID,
       produces = MediaType.APPLICATION_JSON_VALUE
   )
   public ResponseEntity<HabilidadResponse> getById(
@@ -55,14 +55,14 @@ public class HabilidadController {
     HabilidadResponse response = habilidadService.create(request);
     URI location = ServletUriComponentsBuilder
         .fromCurrentRequest()
-        .path("/{id}")
+        .path(ID)
         .buildAndExpand(response.getId())
         .toUri();
     return ResponseEntity.created(location).body(response);
   }
 
   @PutMapping(
-      path = "/{id}",
+      path = ID,
       consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE
   )
@@ -74,7 +74,7 @@ public class HabilidadController {
   }
 
   @DeleteMapping(
-      path = "/{id}",
+      path = ID,
       produces = MediaType.APPLICATION_JSON_VALUE
   )
   public ResponseEntity<Void> delete(

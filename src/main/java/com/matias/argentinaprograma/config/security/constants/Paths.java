@@ -1,20 +1,20 @@
 package com.matias.argentinaprograma.config.security.constants;
 
-public abstract class Paths {
+public interface Paths {
 
-	public static final String AUTH = "/api/auth";
-	public static final String USERS = "/api/users";
+	String AUTH = "/api/auth";
+	String USERS = "/api/users";
 	
-	public static final String REGISTER = "/register";
-	public static final String LOGIN = "/login";
-	public static final String ME = "/me";
+	String REGISTER = "/register";
+	String LOGIN = "/login";
+	String ME = "/me";
 	
-	public static final String ID = "/{id:^\\d+$}";
+	String ID = "/{id:^\\d+$}";
 	
-	public static final String PAGE = "?page={page:[\\d+]}&size={size:[\\d+]}";
-	public static final String DOCUMENTATION_PATHS = "/api/docs/**";
+	String PAGE = "?page={page:[\\d+]}&size={size:[\\d+]}";
+	String DOCUMENTATION_PATHS = "/api/docs/**";
 
-	public static final String TRABAJO = "/api/trabajo";
-	public static final String HABILIDAD = "/api/habilidad";
-	public static final String ESTUDIO = "/api/estudio";
+	String TRABAJO = "/api/trabajo";
+	String HABILIDAD = "/api/habilidad";
+	String ESTUDIO = "/api/estudio";
 }

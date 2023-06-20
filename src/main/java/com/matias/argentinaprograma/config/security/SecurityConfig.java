@@ -27,7 +27,7 @@ import com.matias.argentinaprograma.config.security.filter.JwtRequestFilter;
 @EnableWebSecurity
 @Configuration
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter implements Paths {
 
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;
@@ -64,19 +64,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable().cors().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and().authorizeRequests()
 
-				.antMatchers(Paths.DOCUMENTATION_PATHS).permitAll()
+				.antMatchers(DOCUMENTATION_PATHS).permitAll()
 
-				.antMatchers(HttpMethod.POST, Paths.AUTH + Paths.REGISTER).permitAll()
-				.antMatchers(HttpMethod.POST, Paths.AUTH + Paths.LOGIN).permitAll()
-				.antMatchers(HttpMethod.GET, Paths.AUTH + Paths.ME).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+				.antMatchers(HttpMethod.POST, AUTH + REGISTER).permitAll()
+				.antMatchers(HttpMethod.POST, AUTH + LOGIN).permitAll()
+				.antMatchers(HttpMethod.GET, AUTH + ME).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
 				
-				.antMatchers(HttpMethod.GET, Paths.USERS).hasRole(Role.ADMIN.name())
-				.antMatchers(HttpMethod.DELETE, Paths.USERS + Paths.ID).hasRole(Role.ADMIN.name())
-				.antMatchers(HttpMethod.PATCH, Paths.USERS + Paths.ID).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+				.antMatchers(HttpMethod.GET, USERS).hasRole(Role.ADMIN.name())
+				.antMatchers(HttpMethod.DELETE, USERS + ID).hasRole(Role.ADMIN.name())
+				.antMatchers(HttpMethod.PATCH, USERS + ID).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
 
-				.antMatchers(HttpMethod.GET, Paths.TRABAJO).permitAll()
-				.antMatchers(HttpMethod.GET, Paths.ESTUDIO).permitAll()
-				.antMatchers(HttpMethod.GET, Paths.HABILIDAD).permitAll()
+				.antMatchers(HttpMethod.GET, TRABAJO).permitAll()
+				.antMatchers(HttpMethod.GET, TRABAJO + ID).permitAll()
+				.antMatchers(HttpMethod.POST, TRABAJO).hasRole(Role.ADMIN.name())
+				.antMatchers(HttpMethod.PUT, TRABAJO).hasRole(Role.ADMIN.name())
+				.antMatchers(HttpMethod.DELETE, TRABAJO).hasRole(Role.ADMIN.name())
+
+				.antMatchers(HttpMethod.GET, ESTUDIO).permitAll()
+				.antMatchers(HttpMethod.GET, ESTUDIO + ID).permitAll()
+				.antMatchers(HttpMethod.POST, ESTUDIO).hasRole(Role.ADMIN.name())
+				.antMatchers(HttpMethod.PUT, ESTUDIO).hasRole(Role.ADMIN.name())
+				.antMatchers(HttpMethod.DELETE, ESTUDIO).hasRole(Role.ADMIN.name())
+
+				.antMatchers(HttpMethod.GET, HABILIDAD).permitAll()
+				.antMatchers(HttpMethod.GET, HABILIDAD + ID).permitAll()
+				.antMatchers(HttpMethod.POST, HABILIDAD).hasRole(Role.ADMIN.name())
+				.antMatchers(HttpMethod.PUT, HABILIDAD).hasRole(Role.ADMIN.name())
+				.antMatchers(HttpMethod.DELETE, HABILIDAD).hasRole(Role.ADMIN.name())
 
 				.anyRequest().authenticated().and()
 				.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class).exceptionHandling()

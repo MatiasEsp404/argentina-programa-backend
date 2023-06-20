@@ -41,4 +41,11 @@ public class HabilidadMapper {
         .build();
   }
 
+  public HabilidadEntity toHabilidadEntity(HabilidadRequest request, Integer id) {
+    HabilidadEntity entity = toHabilidadEntity(request);
+    entity.setId(id);
+    return entity;
+
+  }
+
 }
