@@ -43,4 +43,10 @@ public class EstudioMapper {
         .build();
   }
 
+  public EstudioEntity toEstudioEntity(EstudioRequest request, Integer id) {
+    EstudioEntity entity = toEstudioEntity(request);
+    entity.setId(id);
+    return entity;
+  }
+
 }

@@ -34,6 +34,7 @@ public class TrabajoController implements Paths {
   public ResponseEntity<List<TrabajoResponse>> getAll() {
     return ResponseEntity.ok(trabajoService.getAll());
   }
+
   @GetMapping(
       path = ID,
       produces = MediaType.APPLICATION_JSON_VALUE

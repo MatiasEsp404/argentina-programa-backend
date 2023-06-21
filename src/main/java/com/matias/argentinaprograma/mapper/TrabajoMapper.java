@@ -45,4 +45,10 @@ public class TrabajoMapper {
         .build();
   }
 
+  public TrabajoEntity toTrabajoEntity(TrabajoRequest request, Integer id) {
+    TrabajoEntity entity = toTrabajoEntity(request);
+    entity.setId(id);
+    return entity;
+  }
+
 }

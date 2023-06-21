@@ -28,34 +28,38 @@ public class TrabajoService implements ITrabajoService {
 
   @Override
   public TrabajoResponse getById(Integer id) {
-    return null;
+    return trabajoMapper.toTrabajoResponse(findBy(id));
   }
 
   @Override
   public TrabajoResponse create(TrabajoRequest request) {
-    return null;
+    TrabajoEntity entity = trabajoMapper.toTrabajoEntity(request);
+    return trabajoMapper.toTrabajoResponse(trabajoRepository.save(entity));
   }
 
   @Override
   public TrabajoResponse update(Integer id, TrabajoRequest request) {
-    return null;
+    verifyExistence(id);
+    TrabajoEntity entity = trabajoMapper.toTrabajoEntity(request, id);
+    return trabajoMapper.toTrabajoResponse(trabajoRepository.save(entity));
   }
 
   @Override
   public void delete(Integer id) {
-
+    verifyExistence(id);
+    trabajoRepository.deleteById(id);
   }
 
   private void verifyExistence(Integer id) {
     if (!trabajoRepository.existsById(id)) {
-      throw new EntityNotFoundException("Habilidad no encontrada");
+      throw new EntityNotFoundException("Trabajo no encontrade");
     }
   }
 
   private TrabajoEntity findBy(Integer id) {
     Optional<TrabajoEntity> entity = trabajoRepository.findById(id);
     if (!entity.isPresent()) {
-      throw new EntityNotFoundException("Habilidad no encontrada");
+      throw new EntityNotFoundException("Trabajo no encontrado");
     }
     return entity.get();
   }

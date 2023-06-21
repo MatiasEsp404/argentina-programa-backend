@@ -28,22 +28,26 @@ public class EstudioService implements IEstudioService {
 
   @Override
   public EstudioResponse getById(Integer id) {
-    return null;
+    return estudioMapper.toEstudioResponse(findBy(id));
   }
 
   @Override
   public EstudioResponse create(EstudioRequest request) {
-    return null;
+    EstudioEntity entity = estudioMapper.toEstudioEntity(request);
+    return estudioMapper.toEstudioResponse(estudioRepository.save(entity));
   }
 
   @Override
   public EstudioResponse update(Integer id, EstudioRequest request) {
-    return null;
+    verifyExistence(id);
+    EstudioEntity entity = estudioMapper.toEstudioEntity(request, id);
+    return estudioMapper.toEstudioResponse(estudioRepository.save(entity));
   }
 
   @Override
   public void delete(Integer id) {
-
+    verifyExistence(id);
+    estudioRepository.deleteById(id);
   }
 
   private void verifyExistence(Integer id) {
