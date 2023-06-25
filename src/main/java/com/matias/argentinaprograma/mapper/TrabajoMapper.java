@@ -22,6 +22,7 @@ public class TrabajoMapper {
     return TrabajoResponse.builder()
         .id(trabajo.getId())
         .titulo(trabajo.getTitulo())
+        .empresa(trabajo.getEmpresa())
         .descripcion(trabajo.getDescripcion())
         .fechaDesde(trabajo.getFechaDesde())
         .fechaHasta(trabajo.getFechaHasta())
@@ -39,6 +40,7 @@ public class TrabajoMapper {
   public TrabajoEntity toTrabajoEntity(TrabajoRequest request) {
     return TrabajoEntity.builder()
         .titulo(request.getTitulo())
+        .empresa(request.getEmpresa())
         .descripcion(request.getDescripcion())
         .fechaDesde(request.getFechaDesde())
         .fechaHasta(request.getFechaHasta())

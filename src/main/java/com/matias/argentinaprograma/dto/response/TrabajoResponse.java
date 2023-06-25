@@ -15,6 +15,7 @@ public class TrabajoResponse {
 
   private Integer id;
   private String titulo;
+  private String empresa;
   private String fechaDesde;
   private String fechaHasta;
   private String descripcion;

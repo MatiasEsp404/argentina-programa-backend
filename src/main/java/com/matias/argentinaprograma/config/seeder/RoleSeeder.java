@@ -30,6 +30,26 @@ public class RoleSeeder {
 	public void seed(ContextRefreshedEvent event) {
 		createRoleTable();
 		createAdmin();
+		createUser();
+	}
+
+	private void createUser() {
+		String userEmail = "foo@outlook.com";
+		UserEntity user = userRepository.findByEmail(userEmail);
+		if (user == null) {
+			userRepository.save(buildUser(userEmail));
+		}
+	}
+
+	private UserEntity buildUser(String email) {
+		return UserEntity.builder()
+				.firstName("Usuario")
+				.lastName("Argentina Programa")
+				.email(email)
+				.password(passwordEncoder.encode("ArgProg2022"))
+				.role(roleRepository.findByName(Role.USER.getFullRoleName()))
+				.softDeleted(false)
+				.build();
 	}
 
 	private void createAdmin() {

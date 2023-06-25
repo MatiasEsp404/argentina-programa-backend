@@ -26,6 +26,7 @@ public class TrabajoEntity {
   @Column(name = "ID_TRABAJO")
   private Integer id;
   private String titulo;
+  private String empresa;
   private String fechaDesde;
   private String fechaHasta;
   private String descripcion;

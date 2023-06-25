@@ -14,6 +14,7 @@ import lombok.Setter;
 public class TrabajoRequest {
 
   private String titulo;
+  private String empresa;
   private String fechaDesde;
   private String fechaHasta;
   private String descripcion;
