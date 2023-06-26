@@ -77,20 +77,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Path
 				.antMatchers(HttpMethod.GET, TRABAJO).permitAll()
 				.antMatchers(HttpMethod.GET, TRABAJO + ID).permitAll()
 				.antMatchers(HttpMethod.POST, TRABAJO).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
-				.antMatchers(HttpMethod.PUT, TRABAJO).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+				.antMatchers(HttpMethod.PUT, TRABAJO + ID).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
 				.antMatchers(HttpMethod.DELETE, TRABAJO).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
 
 				.antMatchers(HttpMethod.GET, ESTUDIO).permitAll()
 				.antMatchers(HttpMethod.GET, ESTUDIO + ID).permitAll()
 				.antMatchers(HttpMethod.POST, ESTUDIO).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
-				.antMatchers(HttpMethod.PUT, ESTUDIO).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+				.antMatchers(HttpMethod.PUT, ESTUDIO + ID).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
 				.antMatchers(HttpMethod.DELETE, ESTUDIO).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
 
 				.antMatchers(HttpMethod.GET, HABILIDAD).permitAll()
 				.antMatchers(HttpMethod.GET, HABILIDAD + ID).permitAll()
 				.antMatchers(HttpMethod.POST, HABILIDAD).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
-				.antMatchers(HttpMethod.PUT, HABILIDAD).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+				.antMatchers(HttpMethod.PUT, HABILIDAD + ID).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
 				.antMatchers(HttpMethod.DELETE, HABILIDAD).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+
+				.antMatchers(HttpMethod.GET, DATOS_BASICOS + ID).permitAll()
+				.antMatchers(HttpMethod.PUT, DATOS_BASICOS + ID).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
 
 				.anyRequest().authenticated().and()
 				.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class).exceptionHandling()

@@ -17,4 +17,5 @@ public interface Paths {
 	String TRABAJO = "/api/trabajo";
 	String HABILIDAD = "/api/habilidad";
 	String ESTUDIO = "/api/estudio";
+	String DATOS_BASICOS = "/api/datos";
 }
