@@ -12,7 +12,7 @@
 
   <groupId>com.matias</groupId>
   <artifactId>argentina-programa</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.0</version>
 
   <name>argentina-programa</name>
   <description>Proyecto integrador backend de Argentina Programa</description>
