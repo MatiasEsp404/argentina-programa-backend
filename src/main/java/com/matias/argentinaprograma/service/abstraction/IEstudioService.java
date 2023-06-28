@@ -8,7 +8,7 @@ public interface IEstudioService {
 
   List<EstudioResponse> getAll();
 
-  EstudioResponse getById(Integer id);
+  EstudioResponse getBy(Integer id);
 
   EstudioResponse create(EstudioRequest request);
 

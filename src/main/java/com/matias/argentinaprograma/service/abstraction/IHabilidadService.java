@@ -8,7 +8,7 @@ public interface IHabilidadService {
 
   List<HabilidadResponse> getAll();
 
-  HabilidadResponse getById(Integer id);
+  HabilidadResponse getBy(Integer id);
 
   HabilidadResponse create(HabilidadRequest request);
 

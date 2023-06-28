@@ -27,7 +27,7 @@ public class HabilidadService implements IHabilidadService {
   }
 
   @Override
-  public HabilidadResponse getById(Integer id) {
+  public HabilidadResponse getBy(Integer id) {
     return habilidadMapper.toHabilidadResponse(findBy(id));
   }
 

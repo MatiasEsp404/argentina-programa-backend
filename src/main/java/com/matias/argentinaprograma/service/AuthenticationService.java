@@ -11,8 +11,10 @@ import com.matias.argentinaprograma.dto.response.AuthenticationResponse;
 import com.matias.argentinaprograma.dto.response.RegisterResponse;
 import com.matias.argentinaprograma.mapper.UserMapper;
 import com.matias.argentinaprograma.model.RoleEntity;
+import com.matias.argentinaprograma.model.UserEntity;
 import com.matias.argentinaprograma.repository.IRoleRepository;
 import com.matias.argentinaprograma.repository.IUserRepository;
+import com.matias.argentinaprograma.service.abstraction.IAuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,9 +23,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import com.matias.argentinaprograma.model.UserEntity;
-import com.matias.argentinaprograma.service.abstraction.IAuthenticationService;
 
 @Service
 public class AuthenticationService implements IAuthenticationService {
@@ -50,12 +49,12 @@ public class AuthenticationService implements IAuthenticationService {
 	@Override
 	public RegisterResponse register(RegisterRequest registerRequest) {
 		if (userRepository.findByEmail(registerRequest.getEmail()) != null) {
-			throw new UserAlreadyExistException("Email is already in use.");
+			throw new UserAlreadyExistException("El email ya esta en uso");
 		}
 
 		RoleEntity userRoleEntity = roleRepository.findByName(Role.USER.getFullRoleName());
 		if (userRoleEntity == null) {
-			throw new EntityNotFoundException("Missing record in role table.");
+			throw new EntityNotFoundException("Falta un registro en la tabla de roles");
 		}
 
 		UserEntity userEntity = userMapper.toUserEntity(registerRequest);
@@ -80,7 +79,7 @@ public class AuthenticationService implements IAuthenticationService {
 					)
 			);
 		} catch (AuthenticationException e) {
-			throw new InvalidCredentialsException("Invalid email or password.");
+			throw new InvalidCredentialsException("Email o password invalidos");
 		}
 
 		String jwt = jwtUtils.generateToken((UserDetails) authentication.getPrincipal());

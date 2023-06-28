@@ -27,7 +27,7 @@ public class TrabajoService implements ITrabajoService {
   }
 
   @Override
-  public TrabajoResponse getById(Integer id) {
+  public TrabajoResponse getBy(Integer id) {
     return trabajoMapper.toTrabajoResponse(findBy(id));
   }
 
@@ -52,7 +52,7 @@ public class TrabajoService implements ITrabajoService {
 
   private void verifyExistence(Integer id) {
     if (!trabajoRepository.existsById(id)) {
-      throw new EntityNotFoundException("Trabajo no encontrade");
+      throw new EntityNotFoundException("Trabajo no encontrado");
     }
   }
 

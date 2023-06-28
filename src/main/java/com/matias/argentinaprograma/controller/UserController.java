@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping(path = Paths.USERS)
-public class UserController {
+public class UserController implements Paths {
 
 	@Autowired
 	private IUserService userService;
@@ -30,13 +30,13 @@ public class UserController {
 		return ResponseEntity.ok().body(userService.listActiveUsers());
 	}
 
-	@DeleteMapping(value = Paths.ID, produces = MediaType.APPLICATION_JSON_VALUE)
+	@DeleteMapping(value = ID, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		userService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 
-	@PatchMapping(value = Paths.ID, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PatchMapping(value = ID, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Void> update(@PathVariable Integer id, @Valid @RequestBody UpdateUserRequest updateUserRequest) {
 		userService.update(id, updateUserRequest);
 		return ResponseEntity.noContent().build();

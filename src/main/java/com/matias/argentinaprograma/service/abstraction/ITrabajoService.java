@@ -8,7 +8,7 @@ public interface ITrabajoService {
 
   List<TrabajoResponse> getAll();
 
-  TrabajoResponse getById(Integer id);
+  TrabajoResponse getBy(Integer id);
 
   TrabajoResponse create(TrabajoRequest request);
 

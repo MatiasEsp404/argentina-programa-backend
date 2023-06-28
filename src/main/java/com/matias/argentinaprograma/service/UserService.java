@@ -56,7 +56,7 @@ public class UserService implements UserDetailsService, IUserService {
 	private UserEntity getUser(String email) {
 		UserEntity userEntity = userRepository.findByEmail(email);
 		if (userEntity == null) {
-			throw new UsernameNotFoundException("User not found.");
+			throw new UsernameNotFoundException("Usuario no encontrado");
 		}
 		return userEntity;
 	}
@@ -71,7 +71,7 @@ public class UserService implements UserDetailsService, IUserService {
 	private UserEntity findBy(Integer id) {
 		Optional<UserEntity> optionalUserEntity = userRepository.findById(id);
 		if (!optionalUserEntity.isPresent() || Boolean.TRUE.equals(optionalUserEntity.get().getSoftDeleted())) {
-			throw new EntityNotFoundException("User not found.");
+			throw new EntityNotFoundException("Usuario no encontrado");
 		}
 		return optionalUserEntity.get();
 	}

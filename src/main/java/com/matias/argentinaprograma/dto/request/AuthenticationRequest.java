@@ -17,10 +17,10 @@ import lombok.Setter;
 @Builder
 public class AuthenticationRequest {
 
-	@Email(message = "The email has invalid format.")
+	@Email(message = "El email tiene un formato invalido")
 	private String email;
 
-	@Length(min = 8, max = 16, message = "The password must be between 8 and 16 characters.")
+	@Length(min = 8, max = 16, message = "El password debe tener entre 8 y 16 caracteres")
 	private String password;
 	
 }

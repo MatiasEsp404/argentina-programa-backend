@@ -27,7 +27,7 @@ public class EstudioService implements IEstudioService {
   }
 
   @Override
-  public EstudioResponse getById(Integer id) {
+  public EstudioResponse getBy(Integer id) {
     return estudioMapper.toEstudioResponse(findBy(id));
   }
 

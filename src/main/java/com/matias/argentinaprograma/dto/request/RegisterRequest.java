@@ -2,16 +2,14 @@ package com.matias.argentinaprograma.dto.request;
 
 import com.matias.argentinaprograma.config.security.constants.Validations;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-
-import org.hibernate.validator.constraints.Length;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 @Getter
 @Setter
@@ -20,20 +18,20 @@ import lombok.Setter;
 @Builder
 public class RegisterRequest {
 
-	@NotNull(message = "The first name must not be null")
-	@Pattern(regexp = Validations.CHARACTERS_WITH_WHITE_SPACES, message = "First name can contain letters and spaces")
-	private String firstName;
+  @NotBlank(message = "El nombre no puede estar en blanco")
+  @Pattern(regexp = Validations.CHARACTERS_WITH_WHITE_SPACES, message = "El nombre solo puede contener caracteres alfabeticos y espacios")
+  private String firstName;
 
-	@NotNull(message = "The last name must not be null")
-	@Pattern(regexp = Validations.CHARACTERS_WITH_WHITE_SPACES, message = "Last name can contain letters and spaces")
-	private String lastName;
+  @NotBlank(message = "El apellido no puede estar en blanco")
+  @Pattern(regexp = Validations.CHARACTERS_WITH_WHITE_SPACES, message = "El apellido solo puede contener caracteres alfabeticos y espacios")
+  private String lastName;
 
-	@NotNull(message = "The email must not be null")
-	@Email(message = "The email has invalid format.")
-	private String email;
+  @NotBlank(message = "El email no puede estar en blanco")
+  @Email(message = "El email tiene un formato invalido")
+  private String email;
 
-	@NotNull(message = "The password must not be null")
-	@Length(min = 8, max = 16, message = "The password must be between 8 and 16 characters.")
-	private String password;
+  @NotBlank(message = "El password no puede estar en blanco")
+  @Length(min = 8, max = 16, message = "El password debe tener entre 8 y 16 caracteres")
+  private String password;
 
 }

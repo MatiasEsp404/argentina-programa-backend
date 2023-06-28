@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RestController
 @RequestMapping(path = Paths.AUTH)
-public class AuthenticationController {
+public class AuthenticationController implements Paths {
 
 	@Autowired
 	private IAuthenticationService authService;
@@ -31,18 +31,17 @@ public class AuthenticationController {
 	@Autowired
 	private IUserService userService;
 
-	@PostMapping(path = Paths.REGISTER, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = REGISTER, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<RegisterResponse> register(@Valid @RequestBody RegisterRequest registerRequest) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(registerRequest));
 	}
 
-	@PostMapping(path = Paths.LOGIN, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<AuthenticationResponse> login(
-			@Valid @RequestBody AuthenticationRequest authenticationRequest) {
+	@PostMapping(path = LOGIN, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<AuthenticationResponse> login(@Valid @RequestBody AuthenticationRequest authenticationRequest) {
 		return ResponseEntity.ok().body(authService.login(authenticationRequest));
 	}
 
-	@GetMapping(path = Paths.ME, produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = ME, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserResponse> getUser() {
 		return ResponseEntity.ok().body(userService.getUserAuthenticated());
 	}
