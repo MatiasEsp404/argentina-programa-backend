@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class RoleSeeder {
 
   @Autowired
-  private IRoleRepository roleRepository;
+  private IRoleRepository repository;
 
   @EventListener
   public void seed(ContextRefreshedEvent event) {
@@ -21,8 +21,8 @@ public class RoleSeeder {
   }
 
   private void createRoleTable() {
-    if (roleRepository.count() < 2) {
-      roleRepository.saveAll(Arrays.asList(buildRole(Role.USER), buildRole(Role.ADMIN)));
+    if (repository.count() < 2) {
+      repository.saveAll(Arrays.asList(buildRole(Role.USER), buildRole(Role.ADMIN)));
     }
   }
 

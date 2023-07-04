@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class DatosBasicosSeeder {
 
   @Autowired
-  private IDatosBasicosRepository datosBasicosRepository;
+  private IDatosBasicosRepository repository;
 
   @EventListener
   public void seed(ContextRefreshedEvent event) {
@@ -19,8 +19,8 @@ public class DatosBasicosSeeder {
   }
 
   private void createDatosBasicos() {
-    if (datosBasicosRepository.count() == 0) {
-      datosBasicosRepository.save(buildDatosBasicos());
+    if (repository.count() == 0) {
+      repository.save(buildDatosBasicos());
     }
   }
 
