@@ -19,7 +19,9 @@ public class DatosBasicosSeeder {
   }
 
   private void createDatosBasicos() {
-    datosBasicosRepository.save(buildDatosBasicos());
+    if (datosBasicosRepository.count() == 0) {
+      datosBasicosRepository.save(buildDatosBasicos());
+    }
   }
 
   private DatosBasicosEntity buildDatosBasicos() {

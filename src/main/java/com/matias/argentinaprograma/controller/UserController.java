@@ -4,7 +4,6 @@ import com.matias.argentinaprograma.config.security.constants.Paths;
 import com.matias.argentinaprograma.dto.request.UpdateUserRequest;
 import com.matias.argentinaprograma.dto.response.ListUsersResponse;
 import com.matias.argentinaprograma.service.abstraction.IUserService;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,24 +21,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = Paths.USERS)
 public class UserController implements Paths {
 
-	@Autowired
-	private IUserService userService;
-	
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ListUsersResponse> listActiveUsers() {
-		return ResponseEntity.ok().body(userService.listActiveUsers());
-	}
+  @Autowired
+  private IUserService userService;
 
-	@DeleteMapping(value = ID, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> delete(@PathVariable Integer id) {
-		userService.delete(id);
-		return ResponseEntity.noContent().build();
-	}
+  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<ListUsersResponse> listActiveUsers() {
+    return ResponseEntity.ok().body(userService.listActiveUsers());
+  }
 
-	@PatchMapping(value = ID, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Void> update(@PathVariable Integer id, @Valid @RequestBody UpdateUserRequest updateUserRequest) {
-		userService.update(id, updateUserRequest);
-		return ResponseEntity.noContent().build();
-	}
+  @DeleteMapping(value = ID, produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<Void> delete(@PathVariable Integer id) {
+    userService.delete(id);
+    return ResponseEntity.noContent().build();
+  }
+
+  @PatchMapping(value = ID, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<Void> update(@PathVariable Integer id,
+      @RequestBody UpdateUserRequest updateUserRequest) {
+    userService.update(id, updateUserRequest);
+    return ResponseEntity.noContent().build();
+  }
 
 }

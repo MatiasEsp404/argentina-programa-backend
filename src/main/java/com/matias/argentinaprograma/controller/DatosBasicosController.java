@@ -4,7 +4,6 @@ import com.matias.argentinaprograma.config.security.constants.Paths;
 import com.matias.argentinaprograma.dto.request.DatosBasicosRequest;
 import com.matias.argentinaprograma.dto.response.DatosBasicosResponse;
 import com.matias.argentinaprograma.service.abstraction.IDatosBasicosService;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +29,8 @@ public class DatosBasicosController implements Paths {
   }
 
   @PutMapping(path = ID, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<DatosBasicosResponse> update(@PathVariable Integer id, @Valid @RequestBody DatosBasicosRequest request) {
+  public ResponseEntity<DatosBasicosResponse> update(@PathVariable Integer id,
+      @RequestBody DatosBasicosRequest request) {
     return ResponseEntity.ok().body(datosBasicosService.update(request, id));
   }
 

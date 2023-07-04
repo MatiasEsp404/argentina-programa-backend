@@ -6,7 +6,6 @@ import com.matias.argentinaprograma.dto.response.EstudioResponse;
 import com.matias.argentinaprograma.service.abstraction.IEstudioService;
 import java.net.URI;
 import java.util.List;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +39,7 @@ public class EstudioController implements Paths {
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<EstudioResponse> create(@Valid @RequestBody EstudioRequest request) {
+  public ResponseEntity<EstudioResponse> create(@RequestBody EstudioRequest request) {
     EstudioResponse response = estudioService.create(request);
     URI location = ServletUriComponentsBuilder
         .fromCurrentRequest()
@@ -51,7 +50,8 @@ public class EstudioController implements Paths {
   }
 
   @PutMapping(path = ID, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<EstudioResponse> update(@PathVariable Integer id, @Valid @RequestBody EstudioRequest request) {
+  public ResponseEntity<EstudioResponse> update(@PathVariable Integer id,
+      @RequestBody EstudioRequest request) {
     return ResponseEntity.ok().body(estudioService.update(id, request));
   }
 

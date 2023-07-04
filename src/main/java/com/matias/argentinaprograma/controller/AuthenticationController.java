@@ -8,7 +8,6 @@ import com.matias.argentinaprograma.dto.response.RegisterResponse;
 import com.matias.argentinaprograma.dto.response.UserResponse;
 import com.matias.argentinaprograma.service.abstraction.IAuthenticationService;
 import com.matias.argentinaprograma.service.abstraction.IUserService;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,25 +24,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = Paths.AUTH)
 public class AuthenticationController implements Paths {
 
-	@Autowired
-	private IAuthenticationService authService;
+  @Autowired
+  private IAuthenticationService authService;
 
-	@Autowired
-	private IUserService userService;
+  @Autowired
+  private IUserService userService;
 
-	@PostMapping(path = REGISTER, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<RegisterResponse> register(@Valid @RequestBody RegisterRequest registerRequest) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(registerRequest));
-	}
+  @PostMapping(path = REGISTER, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<RegisterResponse> register(@RequestBody RegisterRequest registerRequest) {
+    return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(registerRequest));
+  }
 
-	@PostMapping(path = LOGIN, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<AuthenticationResponse> login(@Valid @RequestBody AuthenticationRequest authenticationRequest) {
-		return ResponseEntity.ok().body(authService.login(authenticationRequest));
-	}
+  @PostMapping(path = LOGIN, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<AuthenticationResponse> login(
+      @RequestBody AuthenticationRequest authenticationRequest) {
+    return ResponseEntity.ok().body(authService.login(authenticationRequest));
+  }
 
-	@GetMapping(path = ME, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UserResponse> getUser() {
-		return ResponseEntity.ok().body(userService.getUserAuthenticated());
-	}
+  @GetMapping(path = ME, produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<UserResponse> getUser() {
+    return ResponseEntity.ok().body(userService.getUserAuthenticated());
+  }
 
 }

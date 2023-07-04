@@ -6,7 +6,6 @@ import com.matias.argentinaprograma.dto.response.HabilidadResponse;
 import com.matias.argentinaprograma.service.abstraction.IHabilidadService;
 import java.net.URI;
 import java.util.List;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +39,7 @@ public class HabilidadController implements Paths {
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<HabilidadResponse> create(@Valid @RequestBody HabilidadRequest request) {
+  public ResponseEntity<HabilidadResponse> create(@RequestBody HabilidadRequest request) {
     HabilidadResponse response = habilidadService.create(request);
     URI location = ServletUriComponentsBuilder
         .fromCurrentRequest()
@@ -51,7 +50,8 @@ public class HabilidadController implements Paths {
   }
 
   @PutMapping(path = ID, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<HabilidadResponse> update(@PathVariable Integer id, @Valid @RequestBody HabilidadRequest request) {
+  public ResponseEntity<HabilidadResponse> update(@PathVariable Integer id,
+      @RequestBody HabilidadRequest request) {
     return ResponseEntity.ok().body(habilidadService.update(id, request));
   }
 

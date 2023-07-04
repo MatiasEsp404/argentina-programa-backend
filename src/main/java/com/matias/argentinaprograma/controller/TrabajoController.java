@@ -6,7 +6,6 @@ import com.matias.argentinaprograma.dto.response.TrabajoResponse;
 import com.matias.argentinaprograma.service.abstraction.ITrabajoService;
 import java.net.URI;
 import java.util.List;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +39,7 @@ public class TrabajoController implements Paths {
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<TrabajoResponse> create(@Valid @RequestBody TrabajoRequest request) {
+  public ResponseEntity<TrabajoResponse> create(@RequestBody TrabajoRequest request) {
     TrabajoResponse response = trabajoService.create(request);
     URI location = ServletUriComponentsBuilder
         .fromCurrentRequest()
@@ -51,7 +50,8 @@ public class TrabajoController implements Paths {
   }
 
   @PutMapping(path = ID, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<TrabajoResponse> update(@PathVariable Integer id, @Valid @RequestBody TrabajoRequest request) {
+  public ResponseEntity<TrabajoResponse> update(@PathVariable Integer id,
+      @RequestBody TrabajoRequest request) {
     return ResponseEntity.ok().body(trabajoService.update(id, request));
   }
 
