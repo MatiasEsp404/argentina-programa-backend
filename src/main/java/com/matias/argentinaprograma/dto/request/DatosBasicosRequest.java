@@ -1,19 +1,8 @@
 package com.matias.argentinaprograma.dto.request;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class DatosBasicosRequest {
 
   @Length(max = 64, message = "El nombre no debe superar los 64 caracteres")
@@ -28,4 +17,27 @@ public class DatosBasicosRequest {
   @NotBlank(message = "El link de la imagen no puede estar en blanco")
   private String imagen;
 
+  public String getNombre() {
+    return nombre;
+  }
+
+  public void setNombre(String nombre) {
+    this.nombre = nombre;
+  }
+
+  public String getTitulo() {
+    return titulo;
+  }
+
+  public void setTitulo(String titulo) {
+    this.titulo = titulo;
+  }
+
+  public String getImagen() {
+    return imagen;
+  }
+
+  public void setImagen(String imagen) {
+    this.imagen = imagen;
+  }
 }

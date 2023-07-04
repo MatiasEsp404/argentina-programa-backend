@@ -1,52 +1,44 @@
 package com.matias.argentinaprograma.mapper;
 
+import com.matias.argentinaprograma.dto.request.RegisterRequest;
 import com.matias.argentinaprograma.dto.response.RegisterResponse;
 import com.matias.argentinaprograma.dto.response.UserResponse;
+import com.matias.argentinaprograma.model.UserEntity;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.stereotype.Component;
-
-import com.matias.argentinaprograma.dto.request.RegisterRequest;
-import com.matias.argentinaprograma.model.UserEntity;
 
 @Component
 public class UserMapper {
 
-	public UserEntity toUserEntity(RegisterRequest registerRequest) {
-		return UserEntity.builder()
-				.firstName(registerRequest.getFirstName())
-				.lastName(registerRequest.getLastName())
-				.email(registerRequest.getEmail())
-				.password(registerRequest.getPassword())
-				.build();
-	}
+  public UserEntity toUserEntity(RegisterRequest request) {
+    UserEntity entity = new UserEntity();
+    entity.setEmail(request.getEmail());
+    entity.setPassword(request.getPassword());
+    return entity;
+  }
 
-	public RegisterResponse toRegisterResponse(UserEntity userEntity) {
-		return RegisterResponse.builder()
-				.id(userEntity.getId())
-				.firstName(userEntity.getFirstName())
-				.lastName(userEntity.getLastName())
-				.email(userEntity.getEmail())
-				.build();
-	}
+  public RegisterResponse toRegisterResponse(UserEntity entity) {
+    RegisterResponse response = new RegisterResponse();
+    response.setId(entity.getId());
+    response.setEmail(entity.getEmail());
+    return response;
+  }
 
-	public List<UserResponse> toListUserResponse(List<UserEntity> listUserEntities) {
-		List<UserResponse> userResponses = new ArrayList<>();
-		for (UserEntity userEntity : listUserEntities) {
-			userResponses.add(toUserResponse(userEntity));
-		}
-		return userResponses;
-	}
+  public List<UserResponse> toListUserResponse(List<UserEntity> entities) {
+    List<UserResponse> userResponses = new ArrayList<>();
+    for (UserEntity entity : entities) {
+      userResponses.add(toUserResponse(entity));
+    }
+    return userResponses;
+  }
 
-	public UserResponse toUserResponse(UserEntity userEntity) {
-		return UserResponse.builder()
-				.id(userEntity.getId())
-				.firstName(userEntity.getFirstName())
-				.lastName(userEntity.getLastName())
-				.email(userEntity.getEmail())
-				.role(userEntity.getRole().getName())
-				.build();
-	}
+  public UserResponse toUserResponse(UserEntity entity) {
+    UserResponse response = new UserResponse();
+    response.setId(entity.getId());
+    response.setEmail(entity.getEmail());
+    response.setRole(entity.getRole().getName());
+    return response;
+  }
 
 }

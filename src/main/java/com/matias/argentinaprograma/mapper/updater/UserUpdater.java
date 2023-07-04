@@ -19,20 +19,12 @@ public class UserUpdater {
 	private IUserRepository userRepository;
 
 	public UserEntity update(UpdateUserRequest updateUserRequest, UserEntity userEntity) {
-		String firstName = updateUserRequest.getFirstName();
-		if (firstName != null) {
-			userEntity.setFirstName(firstName);
-		}
-		String lastName = updateUserRequest.getLastName();
-		if (lastName != null) {
-			userEntity.setLastName(lastName);
-		}
 		String email = updateUserRequest.getEmail();
 		if (email != null) {
 			if (userRepository.findByEmail(email) != null) {
-				throw new UserAlreadyExistException("Email is already in use.");
+				throw new UserAlreadyExistException("El email ya está en uso");
 			}
-			userEntity.setEmail(email); // TODO El cambio de email debería estar sujeto a una confirmación por email.
+			userEntity.setEmail(email);
 		}
 		String password = updateUserRequest.getPassword();
 		if (password != null) {

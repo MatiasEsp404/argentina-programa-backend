@@ -10,41 +10,33 @@ import org.springframework.stereotype.Component;
 @Component
 public class TrabajoMapper {
 
-  public List<TrabajoResponse> toTrabajoResponses(List<TrabajoEntity> trabajos){
+  public List<TrabajoResponse> toTrabajoResponses(List<TrabajoEntity> trabajos) {
     List<TrabajoResponse> response = new ArrayList<>();
-    for(TrabajoEntity trabajo : trabajos){
+    for (TrabajoEntity trabajo : trabajos) {
       response.add(toTrabajoResponse(trabajo));
     }
     return response;
   }
 
-  public TrabajoResponse toTrabajoResponse(TrabajoEntity trabajo){
-    return TrabajoResponse.builder()
-        .id(trabajo.getId())
-        .titulo(trabajo.getTitulo())
-        .empresa(trabajo.getEmpresa())
-        .descripcion(trabajo.getDescripcion())
-        .fechaDesde(trabajo.getFechaDesde())
-        .fechaHasta(trabajo.getFechaHasta())
-        .build();
-  }
-
-  public List<TrabajoEntity> toTrabajoEntities(List<TrabajoRequest> requests) {
-    List<TrabajoEntity> entities = new ArrayList<>();
-    for (TrabajoRequest request : requests) {
-      entities.add(toTrabajoEntity(request));
-    }
-    return entities;
+  public TrabajoResponse toTrabajoResponse(TrabajoEntity trabajo) {
+    TrabajoResponse response = new TrabajoResponse();
+    response.setId(trabajo.getId());
+    response.setTitulo(trabajo.getTitulo());
+    response.setEmpresa(trabajo.getEmpresa());
+    response.setDescripcion(trabajo.getDescripcion());
+    response.setFechaDesde(trabajo.getFechaDesde());
+    response.setFechaHasta(trabajo.getFechaHasta());
+    return response;
   }
 
   public TrabajoEntity toTrabajoEntity(TrabajoRequest request) {
-    return TrabajoEntity.builder()
-        .titulo(request.getTitulo())
-        .empresa(request.getEmpresa())
-        .descripcion(request.getDescripcion())
-        .fechaDesde(request.getFechaDesde())
-        .fechaHasta(request.getFechaHasta())
-        .build();
+    TrabajoEntity entity = new TrabajoEntity();
+    entity.setTitulo(request.getTitulo());
+    entity.setEmpresa(request.getEmpresa());
+    entity.setDescripcion(request.getDescripcion());
+    entity.setFechaDesde(request.getFechaDesde());
+    entity.setFechaHasta(request.getFechaHasta());
+    return entity;
   }
 
   public TrabajoEntity toTrabajoEntity(TrabajoRequest request, Integer id) {

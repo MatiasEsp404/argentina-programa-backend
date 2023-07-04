@@ -3,18 +3,9 @@ package com.matias.argentinaprograma.dto.request;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+
 public class HabilidadRequest {
 
   @Length(max = 64, message = "El nombre no debe superar los 64 caracteres")
@@ -25,4 +16,19 @@ public class HabilidadRequest {
   @Max(value = 100, message = "La capacidad no puede ser mayor a 100")
   private Integer capacidad;
 
+  public String getNombre() {
+    return nombre;
+  }
+
+  public void setNombre(String nombre) {
+    this.nombre = nombre;
+  }
+
+  public Integer getCapacidad() {
+    return capacidad;
+  }
+
+  public void setCapacidad(Integer capacidad) {
+    this.capacidad = capacidad;
+  }
 }

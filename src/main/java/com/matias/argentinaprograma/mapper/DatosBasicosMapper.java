@@ -9,21 +9,21 @@ import org.springframework.stereotype.Component;
 public class DatosBasicosMapper {
 
   public DatosBasicosEntity toDatosBasicosEntity(DatosBasicosRequest request, Integer id) {
-    return DatosBasicosEntity.builder()
-        .id(id)
-        .nombre(request.getNombre())
-        .titulo(request.getTitulo())
-        .imagen(request.getImagen())
-        .build();
+    DatosBasicosEntity entity = new DatosBasicosEntity();
+    entity.setId(id);
+    entity.setNombre(request.getNombre());
+    entity.setTitulo(request.getTitulo());
+    entity.setImagen(request.getImagen());
+    return entity;
   }
 
   public DatosBasicosResponse toDatosBasicosResponse(DatosBasicosEntity entity) {
-    return DatosBasicosResponse.builder()
-        .id(entity.getId())
-        .nombre(entity.getNombre())
-        .titulo(entity.getTitulo())
-        .imagen(entity.getImagen())
-        .build();
+    DatosBasicosResponse response = new DatosBasicosResponse();
+    response.setId(entity.getId());
+    response.setNombre(entity.getNombre());
+    response.setTitulo(entity.getTitulo());
+    response.setImagen(entity.getImagen());
+    return response;
   }
 
 }

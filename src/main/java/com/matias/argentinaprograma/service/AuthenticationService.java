@@ -28,62 +28,65 @@ import org.springframework.stereotype.Service;
 public class AuthenticationService implements IAuthenticationService {
 
 
-	@Autowired
-	private IUserRepository userRepository;
+  @Autowired
+  private IUserRepository userRepository;
 
-	@Autowired
-	private IRoleRepository roleRepository;
+  @Autowired
+  private IRoleRepository roleRepository;
 
-	@Autowired
-	private UserMapper userMapper;
+  @Autowired
+  private UserMapper userMapper;
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+  @Autowired
+  private PasswordEncoder passwordEncoder;
 
-	@Autowired
-	private JwtUtils jwtUtils;
+  @Autowired
+  private JwtUtils jwtUtils;
 
-	@Autowired
-	private AuthenticationManager authManager;
+  @Autowired
+  private AuthenticationManager authManager;
 
-	@Override
-	public RegisterResponse register(RegisterRequest registerRequest) {
-		if (userRepository.findByEmail(registerRequest.getEmail()) != null) {
-			throw new UserAlreadyExistException("El email ya esta en uso");
-		}
+  @Override
+  public RegisterResponse register(RegisterRequest registerRequest) {
+    if (userRepository.findByEmail(registerRequest.getEmail()) != null) {
+      throw new UserAlreadyExistException("El email ya esta en uso");
+    }
 
-		RoleEntity userRoleEntity = roleRepository.findByName(Role.USER.getFullRoleName());
-		if (userRoleEntity == null) {
-			throw new EntityNotFoundException("Falta un registro en la tabla de roles");
-		}
+    RoleEntity userRoleEntity = roleRepository.findByName(Role.USER.getFullRoleName());
+    if (userRoleEntity == null) {
+      throw new EntityNotFoundException("Falta un registro en la tabla de roles");
+    }
 
-		UserEntity userEntity = userMapper.toUserEntity(registerRequest);
-		userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
-		userEntity.setSoftDeleted(false);
-		userEntity.setRole(userRoleEntity);
-		userEntity = userRepository.save(userEntity);
+    UserEntity userEntity = userMapper.toUserEntity(registerRequest);
+    userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+    userEntity.setSoftDeleted(false);
+    userEntity.setRole(userRoleEntity);
+    userEntity = userRepository.save(userEntity);
 
-		RegisterResponse registerResponse = userMapper.toRegisterResponse(userEntity);
-		registerResponse.setToken(jwtUtils.generateToken(userEntity));
-		return registerResponse;
-	}
+    RegisterResponse registerResponse = userMapper.toRegisterResponse(userEntity);
+    registerResponse.setToken(jwtUtils.generateToken(userEntity));
+    return registerResponse;
+  }
 
-	@Override
-	public AuthenticationResponse login(AuthenticationRequest authenticationRequest) {
-		Authentication authentication;
-		try {
-			authentication = authManager.authenticate(
-					new UsernamePasswordAuthenticationToken(
-							authenticationRequest.getEmail(),
-							authenticationRequest.getPassword()
-					)
-			);
-		} catch (AuthenticationException e) {
-			throw new InvalidCredentialsException("Email o password invalidos");
-		}
+  @Override
+  public AuthenticationResponse login(AuthenticationRequest authenticationRequest) {
+    Authentication authentication;
+    try {
+      authentication = authManager.authenticate(
+          new UsernamePasswordAuthenticationToken(
+              authenticationRequest.getEmail(),
+              authenticationRequest.getPassword()
+          )
+      );
+    } catch (AuthenticationException e) {
+      throw new InvalidCredentialsException("Email o password invalidos");
+    }
 
-		String jwt = jwtUtils.generateToken((UserDetails) authentication.getPrincipal());
-		return new AuthenticationResponse(jwt);
-	}
-	
+    String jwt = jwtUtils.generateToken((UserDetails) authentication.getPrincipal());
+
+    AuthenticationResponse response = new AuthenticationResponse();
+    response.setToken(jwt);
+    return response;
+  }
+
 }

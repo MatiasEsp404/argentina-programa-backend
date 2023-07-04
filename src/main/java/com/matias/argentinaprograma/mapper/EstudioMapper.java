@@ -19,28 +19,20 @@ public class EstudioMapper {
   }
 
   public EstudioResponse toEstudioResponse(EstudioEntity estudio) {
-    return EstudioResponse.builder()
-        .id(estudio.getId())
-        .titulo(estudio.getTitulo())
-        .descripcion(estudio.getDescripcion())
-        .fechaFinalizacion(estudio.getFechaFinalizacion())
-        .build();
-  }
-
-  public List<EstudioEntity> toEstudioEntities(List<EstudioRequest> requests) {
-    List<EstudioEntity> entities = new ArrayList<>();
-    for (EstudioRequest request : requests) {
-      entities.add(toEstudioEntity(request));
-    }
-    return entities;
+    EstudioResponse response = new EstudioResponse();
+    response.setId(estudio.getId());
+    response.setTitulo(estudio.getTitulo());
+    response.setDescripcion(estudio.getDescripcion());
+    response.setFechaFinalizacion(estudio.getFechaFinalizacion());
+    return response;
   }
 
   public EstudioEntity toEstudioEntity(EstudioRequest request) {
-    return EstudioEntity.builder()
-        .titulo(request.getTitulo())
-        .descripcion(request.getDescripcion())
-        .fechaFinalizacion(request.getFechaFinalizacion())
-        .build();
+    EstudioEntity entity = new EstudioEntity();
+    entity.setTitulo(request.getTitulo());
+    entity.setDescripcion(request.getDescripcion());
+    entity.setFechaFinalizacion(request.getFechaFinalizacion());
+    return entity;
   }
 
   public EstudioEntity toEstudioEntity(EstudioRequest request, Integer id) {

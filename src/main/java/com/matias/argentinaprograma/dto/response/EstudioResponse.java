@@ -1,16 +1,5 @@
 package com.matias.argentinaprograma.dto.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class EstudioResponse {
 
   private Integer id;
@@ -18,4 +7,35 @@ public class EstudioResponse {
   private String fechaFinalizacion;
   private String descripcion;
 
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public String getTitulo() {
+    return titulo;
+  }
+
+  public void setTitulo(String titulo) {
+    this.titulo = titulo;
+  }
+
+  public String getFechaFinalizacion() {
+    return fechaFinalizacion;
+  }
+
+  public void setFechaFinalizacion(String fechaFinalizacion) {
+    this.fechaFinalizacion = fechaFinalizacion;
+  }
+
+  public String getDescripcion() {
+    return descripcion;
+  }
+
+  public void setDescripcion(String descripcion) {
+    this.descripcion = descripcion;
+  }
 }

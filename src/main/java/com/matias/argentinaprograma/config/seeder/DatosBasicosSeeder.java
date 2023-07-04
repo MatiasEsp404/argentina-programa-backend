@@ -18,16 +18,16 @@ public class DatosBasicosSeeder {
     createDatosBasicos();
   }
 
-  private void createDatosBasicos(){
+  private void createDatosBasicos() {
     datosBasicosRepository.save(buildDatosBasicos());
   }
 
-  private DatosBasicosEntity buildDatosBasicos(){
-    return DatosBasicosEntity.builder()
-        .nombre("Claudio Matias Correa Espinola")
-        .titulo("Desarrollador Java Full Stack")
-        .imagen("https://fotos.com/foto.png")
-        .build();
+  private DatosBasicosEntity buildDatosBasicos() {
+    DatosBasicosEntity entity = new DatosBasicosEntity();
+    entity.setNombre("Claudio Matias Correa Espinola");
+    entity.setTitulo("Desarrollador Java Full Stack");
+    entity.setImagen("https://fotos.com/foto.png");
+    return entity;
   }
 
 }

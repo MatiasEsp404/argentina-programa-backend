@@ -1,18 +1,8 @@
 package com.matias.argentinaprograma.dto.request;
 
 import javax.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class TrabajoRequest {
 
   @Length(max = 64, message = "El titulo no puede superar los 64 caracteres")
@@ -35,4 +25,43 @@ public class TrabajoRequest {
   @NotBlank(message = "La descripcion no puede estar en blanco")
   private String descripcion;
 
+  public String getTitulo() {
+    return titulo;
+  }
+
+  public void setTitulo(String titulo) {
+    this.titulo = titulo;
+  }
+
+  public String getEmpresa() {
+    return empresa;
+  }
+
+  public void setEmpresa(String empresa) {
+    this.empresa = empresa;
+  }
+
+  public String getFechaDesde() {
+    return fechaDesde;
+  }
+
+  public void setFechaDesde(String fechaDesde) {
+    this.fechaDesde = fechaDesde;
+  }
+
+  public String getFechaHasta() {
+    return fechaHasta;
+  }
+
+  public void setFechaHasta(String fechaHasta) {
+    this.fechaHasta = fechaHasta;
+  }
+
+  public String getDescripcion() {
+    return descripcion;
+  }
+
+  public void setDescripcion(String descripcion) {
+    this.descripcion = descripcion;
+  }
 }

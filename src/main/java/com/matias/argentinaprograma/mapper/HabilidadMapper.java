@@ -19,26 +19,18 @@ public class HabilidadMapper {
   }
 
   public HabilidadResponse toHabilidadResponse(HabilidadEntity habilidad) {
-    return HabilidadResponse.builder()
-        .id(habilidad.getId())
-        .capacidad(habilidad.getCapacidad())
-        .nombre(habilidad.getNombre())
-        .build();
-  }
-
-  public List<HabilidadEntity> toHabilidadEntities(List<HabilidadRequest> requests) {
-    List<HabilidadEntity> entities = new ArrayList<>();
-    for(HabilidadRequest request : requests) {
-      entities.add(toHabilidadEntity(request));
-    }
-    return entities;
+    HabilidadResponse response = new HabilidadResponse();
+    response.setId(habilidad.getId());
+    response.setCapacidad(habilidad.getCapacidad());
+    response.setNombre(habilidad.getNombre());
+    return response;
   }
 
   public HabilidadEntity toHabilidadEntity(HabilidadRequest request) {
-    return HabilidadEntity.builder()
-        .nombre(request.getNombre())
-        .capacidad(request.getCapacidad())
-        .build();
+    HabilidadEntity entity = new HabilidadEntity();
+    entity.setNombre(request.getNombre());
+    entity.setCapacidad(request.getCapacidad());
+    return entity;
   }
 
   public HabilidadEntity toHabilidadEntity(HabilidadRequest request, Integer id) {
