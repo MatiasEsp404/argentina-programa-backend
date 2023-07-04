@@ -1,6 +1,5 @@
 package com.matias.argentinaprograma.controller;
 
-import com.matias.argentinaprograma.config.security.constants.Paths;
 import com.matias.argentinaprograma.dto.request.AuthenticationRequest;
 import com.matias.argentinaprograma.dto.request.RegisterRequest;
 import com.matias.argentinaprograma.dto.response.AuthenticationResponse;
@@ -21,8 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
 @RestController
-@RequestMapping(path = Paths.AUTH)
-public class AuthenticationController implements Paths {
+@RequestMapping(path = "/api/auth")
+public class AuthenticationController {
 
   @Autowired
   private IAuthenticationService authService;
@@ -30,18 +29,18 @@ public class AuthenticationController implements Paths {
   @Autowired
   private IUserService userService;
 
-  @PostMapping(path = REGISTER, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  @PostMapping(path = "/register", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<RegisterResponse> register(@RequestBody RegisterRequest registerRequest) {
     return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(registerRequest));
   }
 
-  @PostMapping(path = LOGIN, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  @PostMapping(path = "/login", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<AuthenticationResponse> login(
       @RequestBody AuthenticationRequest authenticationRequest) {
     return ResponseEntity.ok().body(authService.login(authenticationRequest));
   }
 
-  @GetMapping(path = ME, produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(path = "/me", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<UserResponse> getUser() {
     return ResponseEntity.ok().body(userService.getUserAuthenticated());
   }

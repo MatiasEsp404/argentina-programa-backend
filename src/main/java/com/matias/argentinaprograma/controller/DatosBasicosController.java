@@ -1,6 +1,5 @@
 package com.matias.argentinaprograma.controller;
 
-import com.matias.argentinaprograma.config.security.constants.Paths;
 import com.matias.argentinaprograma.dto.request.DatosBasicosRequest;
 import com.matias.argentinaprograma.dto.response.DatosBasicosResponse;
 import com.matias.argentinaprograma.service.abstraction.IDatosBasicosService;
@@ -17,18 +16,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
 @RestController
-@RequestMapping(path = Paths.DATOS_BASICOS)
-public class DatosBasicosController implements Paths {
+@RequestMapping(path = "/api/datos")
+public class DatosBasicosController {
 
   @Autowired
   private IDatosBasicosService datosBasicosService;
 
-  @GetMapping(path = ID, produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<DatosBasicosResponse> getBy(@PathVariable Integer id) {
     return ResponseEntity.ok(datosBasicosService.getBy(id));
   }
 
-  @PutMapping(path = ID, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<DatosBasicosResponse> update(@PathVariable Integer id,
       @RequestBody DatosBasicosRequest request) {
     return ResponseEntity.ok().body(datosBasicosService.update(request, id));

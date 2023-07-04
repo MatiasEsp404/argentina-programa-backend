@@ -1,5 +1,9 @@
 package com.matias.argentinaprograma.config.security;
 
+import com.matias.argentinaprograma.config.security.common.Role;
+import com.matias.argentinaprograma.config.security.filter.CustomAccessDeniedHandler;
+import com.matias.argentinaprograma.config.security.filter.CustomAuthenticationEntryPoint;
+import com.matias.argentinaprograma.config.security.filter.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
@@ -18,16 +22,10 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.matias.argentinaprograma.config.security.constants.Paths;
-import com.matias.argentinaprograma.config.security.common.Role;
-import com.matias.argentinaprograma.config.security.filter.CustomAccessDeniedHandler;
-import com.matias.argentinaprograma.config.security.filter.CustomAuthenticationEntryPoint;
-import com.matias.argentinaprograma.config.security.filter.JwtRequestFilter;
-
 @EnableWebSecurity
 @Configuration
 @SpringBootApplication(exclude = SecurityAutoConfiguration.class)
-public class SecurityConfig extends WebSecurityConfigurerAdapter implements Paths {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;
@@ -64,36 +62,34 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Path
 		http.csrf().disable().cors().and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and().authorizeRequests()
 
-				.antMatchers(DOCUMENTATION_PATHS).permitAll()
-
-				.antMatchers(HttpMethod.POST, AUTH + REGISTER).permitAll()
-				.antMatchers(HttpMethod.POST, AUTH + LOGIN).permitAll()
-				.antMatchers(HttpMethod.GET, AUTH + ME).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+				.antMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
+				.antMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/auth/me").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
 				
-				.antMatchers(HttpMethod.GET, USERS).hasRole(Role.ADMIN.name())
-				.antMatchers(HttpMethod.DELETE, USERS + ID).hasRole(Role.ADMIN.name())
-				.antMatchers(HttpMethod.PATCH, USERS + ID).hasRole(Role.ADMIN.name())
+				.antMatchers(HttpMethod.GET, "/api/users").hasRole(Role.ADMIN.name())
+				.antMatchers(HttpMethod.DELETE, "/api/users/{id}").hasRole(Role.ADMIN.name())
+				.antMatchers(HttpMethod.PATCH, "/api/users/{id}").hasRole(Role.ADMIN.name())
 
-				.antMatchers(HttpMethod.GET, TRABAJO).permitAll()
-				.antMatchers(HttpMethod.GET, TRABAJO + ID).permitAll()
-				.antMatchers(HttpMethod.POST, TRABAJO).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
-				.antMatchers(HttpMethod.PUT, TRABAJO + ID).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
-				.antMatchers(HttpMethod.DELETE, TRABAJO).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+				.antMatchers(HttpMethod.GET, "/api/trabajo").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/trabajo/{id}").permitAll()
+				.antMatchers(HttpMethod.POST, "/api/trabajo").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+				.antMatchers(HttpMethod.PUT, "/api/trabajo/{id}").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+				.antMatchers(HttpMethod.DELETE, "/api/trabajo").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
 
-				.antMatchers(HttpMethod.GET, ESTUDIO).permitAll()
-				.antMatchers(HttpMethod.GET, ESTUDIO + ID).permitAll()
-				.antMatchers(HttpMethod.POST, ESTUDIO).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
-				.antMatchers(HttpMethod.PUT, ESTUDIO + ID).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
-				.antMatchers(HttpMethod.DELETE, ESTUDIO).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+				.antMatchers(HttpMethod.GET, "/api/estudio").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/estudio/{id}").permitAll()
+				.antMatchers(HttpMethod.POST, "/api/estudio").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+				.antMatchers(HttpMethod.PUT, "/api/estudio/{id}").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+				.antMatchers(HttpMethod.DELETE, "/api/estudio").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
 
-				.antMatchers(HttpMethod.GET, HABILIDAD).permitAll()
-				.antMatchers(HttpMethod.GET, HABILIDAD + ID).permitAll()
-				.antMatchers(HttpMethod.POST, HABILIDAD).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
-				.antMatchers(HttpMethod.PUT, HABILIDAD + ID).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
-				.antMatchers(HttpMethod.DELETE, HABILIDAD).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+				.antMatchers(HttpMethod.GET, "/api/habilidad").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/habilidad/{id}").permitAll()
+				.antMatchers(HttpMethod.POST, "/api/habilidad").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+				.antMatchers(HttpMethod.PUT, "/api/habilidad/{id}").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+				.antMatchers(HttpMethod.DELETE, "/api/habilidad").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
 
-				.antMatchers(HttpMethod.GET, DATOS_BASICOS + ID).permitAll()
-				.antMatchers(HttpMethod.PUT, DATOS_BASICOS + ID).hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+				.antMatchers(HttpMethod.GET, "/api/datos/{id}").permitAll()
+				.antMatchers(HttpMethod.PUT, "/api/datos/{id}").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
 
 				.anyRequest().authenticated().and()
 				.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class).exceptionHandling()

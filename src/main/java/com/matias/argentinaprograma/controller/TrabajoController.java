@@ -1,6 +1,5 @@
 package com.matias.argentinaprograma.controller;
 
-import com.matias.argentinaprograma.config.security.constants.Paths;
 import com.matias.argentinaprograma.dto.request.TrabajoRequest;
 import com.matias.argentinaprograma.dto.response.TrabajoResponse;
 import com.matias.argentinaprograma.service.abstraction.ITrabajoService;
@@ -22,8 +21,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @CrossOrigin
 @RestController
-@RequestMapping(path = Paths.TRABAJO)
-public class TrabajoController implements Paths {
+@RequestMapping(path = "/api/trabajo")
+public class TrabajoController {
 
   @Autowired
   private ITrabajoService trabajoService;
@@ -33,7 +32,7 @@ public class TrabajoController implements Paths {
     return ResponseEntity.ok(trabajoService.getAll());
   }
 
-  @GetMapping(path = ID, produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<TrabajoResponse> getBy(@PathVariable Integer id) {
     return ResponseEntity.ok(trabajoService.getBy(id));
   }
@@ -43,19 +42,19 @@ public class TrabajoController implements Paths {
     TrabajoResponse response = trabajoService.create(request);
     URI location = ServletUriComponentsBuilder
         .fromCurrentRequest()
-        .path(ID)
+        .path("/{id}")
         .buildAndExpand(response.getId())
         .toUri();
     return ResponseEntity.created(location).body(response);
   }
 
-  @PutMapping(path = ID, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<TrabajoResponse> update(@PathVariable Integer id,
       @RequestBody TrabajoRequest request) {
     return ResponseEntity.ok().body(trabajoService.update(id, request));
   }
 
-  @DeleteMapping(path = ID, produces = MediaType.APPLICATION_JSON_VALUE)
+  @DeleteMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Void> delete(@PathVariable Integer id) {
     trabajoService.delete(id);
     return ResponseEntity.noContent().build();

@@ -1,6 +1,5 @@
 package com.matias.argentinaprograma.controller;
 
-import com.matias.argentinaprograma.config.security.constants.Paths;
 import com.matias.argentinaprograma.dto.request.UpdateUserRequest;
 import com.matias.argentinaprograma.dto.response.ListUsersResponse;
 import com.matias.argentinaprograma.service.abstraction.IUserService;
@@ -18,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
 @RestController
-@RequestMapping(path = Paths.USERS)
-public class UserController implements Paths {
+@RequestMapping(path = "/api/users")
+public class UserController {
 
   @Autowired
   private IUserService userService;
@@ -29,13 +28,13 @@ public class UserController implements Paths {
     return ResponseEntity.ok().body(userService.listActiveUsers());
   }
 
-  @DeleteMapping(value = ID, produces = MediaType.APPLICATION_JSON_VALUE)
+  @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Void> delete(@PathVariable Integer id) {
     userService.delete(id);
     return ResponseEntity.noContent().build();
   }
 
-  @PatchMapping(value = ID, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+  @PatchMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<Void> update(@PathVariable Integer id,
       @RequestBody UpdateUserRequest updateUserRequest) {
     userService.update(id, updateUserRequest);

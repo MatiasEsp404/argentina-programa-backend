@@ -19,5 +19,5 @@ EXPOSE 8080
 # Copiar el archivo JAR construido desde la etapa anterior
 COPY --from=build /app/target/argentina-programa-1.0.jar /app/argentina-programa-1.0.jar
 
-#Establecer el punto de entrada para ejecutar la aplicación
+# Establecer el punto de entrada para ejecutar la aplicación
 ENTRYPOINT ["java", "-jar", "/app/argentina-programa-1.0.jar"]
