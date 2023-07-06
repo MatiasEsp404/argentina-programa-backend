@@ -1,8 +1,8 @@
 package com.matias.argentinaprograma.controller;
 
 import com.matias.argentinaprograma.dto.request.HabilidadRequest;
-import com.matias.argentinaprograma.dto.response.HabilidadResponse;
-import com.matias.argentinaprograma.service.abstraction.IHabilidadService;
+import com.matias.argentinaprograma.model.HabilidadEntity;
+import com.matias.argentinaprograma.service.HabilidadService;
 import java.net.URI;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,21 +25,21 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 public class HabilidadController {
 
   @Autowired
-  private IHabilidadService habilidadService;
+  private HabilidadService habilidadService;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<List<HabilidadResponse>> getAll() {
+  public ResponseEntity<List<HabilidadEntity>> getAll() {
     return ResponseEntity.ok(habilidadService.getAll());
   }
 
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<HabilidadResponse> getBy(@PathVariable Integer id) {
+  public ResponseEntity<HabilidadEntity> getBy(@PathVariable Integer id) {
     return ResponseEntity.ok(habilidadService.getBy(id));
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<HabilidadResponse> create(@RequestBody HabilidadRequest request) {
-    HabilidadResponse response = habilidadService.create(request);
+  public ResponseEntity<HabilidadEntity> create(@RequestBody HabilidadRequest request) {
+    HabilidadEntity response = habilidadService.create(request);
     URI location = ServletUriComponentsBuilder
         .fromCurrentRequest()
         .path("/{id}")
@@ -49,7 +49,7 @@ public class HabilidadController {
   }
 
   @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<HabilidadResponse> update(@PathVariable Integer id,
+  public ResponseEntity<HabilidadEntity> update(@PathVariable Integer id,
       @RequestBody HabilidadRequest request) {
     return ResponseEntity.ok().body(habilidadService.update(id, request));
   }

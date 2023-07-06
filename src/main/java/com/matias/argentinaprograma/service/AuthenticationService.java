@@ -14,7 +14,6 @@ import com.matias.argentinaprograma.model.RoleEntity;
 import com.matias.argentinaprograma.model.UserEntity;
 import com.matias.argentinaprograma.repository.IRoleRepository;
 import com.matias.argentinaprograma.repository.IUserRepository;
-import com.matias.argentinaprograma.service.abstraction.IAuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,7 +24,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AuthenticationService implements IAuthenticationService {
+public class AuthenticationService {
 
 
   @Autowired
@@ -46,7 +45,6 @@ public class AuthenticationService implements IAuthenticationService {
   @Autowired
   private AuthenticationManager authManager;
 
-  @Override
   public RegisterResponse register(RegisterRequest registerRequest) {
     if (userRepository.findByEmail(registerRequest.getEmail()) != null) {
       throw new UserAlreadyExistException("El email ya esta en uso");
@@ -68,7 +66,6 @@ public class AuthenticationService implements IAuthenticationService {
     return registerResponse;
   }
 
-  @Override
   public AuthenticationResponse login(AuthenticationRequest authenticationRequest) {
     Authentication authentication;
     try {

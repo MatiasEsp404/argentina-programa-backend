@@ -1,8 +1,8 @@
 package com.matias.argentinaprograma.controller;
 
 import com.matias.argentinaprograma.dto.request.EstudioRequest;
-import com.matias.argentinaprograma.dto.response.EstudioResponse;
-import com.matias.argentinaprograma.service.abstraction.IEstudioService;
+import com.matias.argentinaprograma.model.EstudioEntity;
+import com.matias.argentinaprograma.service.EstudioService;
 import java.net.URI;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,21 +25,21 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 public class EstudioController {
 
   @Autowired
-  private IEstudioService estudioService;
+  private EstudioService estudioService;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<List<EstudioResponse>> getAll() {
+  public ResponseEntity<List<EstudioEntity>> getAll() {
     return ResponseEntity.ok(estudioService.getAll());
   }
 
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<EstudioResponse> getBy(@PathVariable Integer id) {
+  public ResponseEntity<EstudioEntity> getBy(@PathVariable Integer id) {
     return ResponseEntity.ok(estudioService.getBy(id));
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<EstudioResponse> create(@RequestBody EstudioRequest request) {
-    EstudioResponse response = estudioService.create(request);
+  public ResponseEntity<EstudioEntity> create(@RequestBody EstudioRequest request) {
+    EstudioEntity response = estudioService.create(request);
     URI location = ServletUriComponentsBuilder
         .fromCurrentRequest()
         .path("/{id}")
@@ -49,7 +49,7 @@ public class EstudioController {
   }
 
   @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<EstudioResponse> update(@PathVariable Integer id,
+  public ResponseEntity<EstudioEntity> update(@PathVariable Integer id,
       @RequestBody EstudioRequest request) {
     return ResponseEntity.ok().body(estudioService.update(id, request));
   }

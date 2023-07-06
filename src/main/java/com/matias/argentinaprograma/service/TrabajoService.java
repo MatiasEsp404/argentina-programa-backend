@@ -2,18 +2,16 @@ package com.matias.argentinaprograma.service;
 
 import com.matias.argentinaprograma.config.exception.runtime.EntityNotFoundException;
 import com.matias.argentinaprograma.dto.request.TrabajoRequest;
-import com.matias.argentinaprograma.dto.response.TrabajoResponse;
 import com.matias.argentinaprograma.mapper.TrabajoMapper;
 import com.matias.argentinaprograma.model.TrabajoEntity;
 import com.matias.argentinaprograma.repository.ITrabajoRepository;
-import com.matias.argentinaprograma.service.abstraction.ITrabajoService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TrabajoService implements ITrabajoService {
+public class TrabajoService {
 
   @Autowired
   private ITrabajoRepository trabajoRepository;
@@ -21,30 +19,25 @@ public class TrabajoService implements ITrabajoService {
   @Autowired
   private TrabajoMapper trabajoMapper;
 
-  @Override
-  public List<TrabajoResponse> getAll() {
-    return trabajoMapper.toTrabajoResponses(trabajoRepository.findAll());
+  public List<TrabajoEntity> getAll() {
+    return trabajoRepository.findAll();
   }
 
-  @Override
-  public TrabajoResponse getBy(Integer id) {
-    return trabajoMapper.toTrabajoResponse(findBy(id));
+  public TrabajoEntity getBy(Integer id) {
+    return findBy(id);
   }
 
-  @Override
-  public TrabajoResponse create(TrabajoRequest request) {
+  public TrabajoEntity create(TrabajoRequest request) {
     TrabajoEntity entity = trabajoMapper.toTrabajoEntity(request);
-    return trabajoMapper.toTrabajoResponse(trabajoRepository.save(entity));
+    return trabajoRepository.save(entity);
   }
 
-  @Override
-  public TrabajoResponse update(Integer id, TrabajoRequest request) {
+  public TrabajoEntity update(Integer id, TrabajoRequest request) {
     verifyExistence(id);
     TrabajoEntity entity = trabajoMapper.toTrabajoEntity(request, id);
-    return trabajoMapper.toTrabajoResponse(trabajoRepository.save(entity));
+    return trabajoRepository.save(entity);
   }
 
-  @Override
   public void delete(Integer id) {
     verifyExistence(id);
     trabajoRepository.deleteById(id);

@@ -1,8 +1,8 @@
 package com.matias.argentinaprograma.controller;
 
 import com.matias.argentinaprograma.dto.request.DatosBasicosRequest;
-import com.matias.argentinaprograma.dto.response.DatosBasicosResponse;
-import com.matias.argentinaprograma.service.abstraction.IDatosBasicosService;
+import com.matias.argentinaprograma.model.DatosBasicosEntity;
+import com.matias.argentinaprograma.service.DatosBasicosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,15 +20,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class DatosBasicosController {
 
   @Autowired
-  private IDatosBasicosService datosBasicosService;
+  private DatosBasicosService datosBasicosService;
 
   @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<DatosBasicosResponse> getBy(@PathVariable Integer id) {
+  public ResponseEntity<DatosBasicosEntity> getBy(@PathVariable Integer id) {
     return ResponseEntity.ok(datosBasicosService.getBy(id));
   }
 
   @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<DatosBasicosResponse> update(@PathVariable Integer id,
+  public ResponseEntity<DatosBasicosEntity> update(@PathVariable Integer id,
       @RequestBody DatosBasicosRequest request) {
     return ResponseEntity.ok().body(datosBasicosService.update(request, id));
   }

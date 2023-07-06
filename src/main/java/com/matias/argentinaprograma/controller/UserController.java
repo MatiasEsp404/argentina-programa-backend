@@ -2,7 +2,7 @@ package com.matias.argentinaprograma.controller;
 
 import com.matias.argentinaprograma.dto.request.UpdateUserRequest;
 import com.matias.argentinaprograma.dto.response.ListUsersResponse;
-import com.matias.argentinaprograma.service.abstraction.IUserService;
+import com.matias.argentinaprograma.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
   @Autowired
-  private IUserService userService;
+  private UserService userService;
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<ListUsersResponse> listActiveUsers() {

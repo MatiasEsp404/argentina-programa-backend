@@ -5,8 +5,8 @@ import com.matias.argentinaprograma.dto.request.RegisterRequest;
 import com.matias.argentinaprograma.dto.response.AuthenticationResponse;
 import com.matias.argentinaprograma.dto.response.RegisterResponse;
 import com.matias.argentinaprograma.dto.response.UserResponse;
-import com.matias.argentinaprograma.service.abstraction.IAuthenticationService;
-import com.matias.argentinaprograma.service.abstraction.IUserService;
+import com.matias.argentinaprograma.service.AuthenticationService;
+import com.matias.argentinaprograma.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,10 +24,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
 
   @Autowired
-  private IAuthenticationService authService;
+  private AuthenticationService authService;
 
   @Autowired
-  private IUserService userService;
+  private UserService userService;
 
   @PostMapping(path = "/register", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<RegisterResponse> register(@RequestBody RegisterRequest registerRequest) {

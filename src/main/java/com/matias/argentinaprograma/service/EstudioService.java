@@ -2,18 +2,16 @@ package com.matias.argentinaprograma.service;
 
 import com.matias.argentinaprograma.config.exception.runtime.EntityNotFoundException;
 import com.matias.argentinaprograma.dto.request.EstudioRequest;
-import com.matias.argentinaprograma.dto.response.EstudioResponse;
 import com.matias.argentinaprograma.mapper.EstudioMapper;
 import com.matias.argentinaprograma.model.EstudioEntity;
 import com.matias.argentinaprograma.repository.IEstudioRepository;
-import com.matias.argentinaprograma.service.abstraction.IEstudioService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EstudioService implements IEstudioService {
+public class EstudioService {
 
   @Autowired
   private IEstudioRepository estudioRepository;
@@ -21,30 +19,25 @@ public class EstudioService implements IEstudioService {
   @Autowired
   private EstudioMapper estudioMapper;
 
-  @Override
-  public List<EstudioResponse> getAll() {
-    return estudioMapper.toEstudioResponses(estudioRepository.findAll());
+  public List<EstudioEntity> getAll() {
+    return estudioRepository.findAll();
   }
 
-  @Override
-  public EstudioResponse getBy(Integer id) {
-    return estudioMapper.toEstudioResponse(findBy(id));
+  public EstudioEntity getBy(Integer id) {
+    return findBy(id);
   }
 
-  @Override
-  public EstudioResponse create(EstudioRequest request) {
+  public EstudioEntity create(EstudioRequest request) {
     EstudioEntity entity = estudioMapper.toEstudioEntity(request);
-    return estudioMapper.toEstudioResponse(estudioRepository.save(entity));
+    return estudioRepository.save(entity);
   }
 
-  @Override
-  public EstudioResponse update(Integer id, EstudioRequest request) {
+  public EstudioEntity update(Integer id, EstudioRequest request) {
     verifyExistence(id);
     EstudioEntity entity = estudioMapper.toEstudioEntity(request, id);
-    return estudioMapper.toEstudioResponse(estudioRepository.save(entity));
+    return estudioRepository.save(entity);
   }
 
-  @Override
   public void delete(Integer id) {
     verifyExistence(id);
     estudioRepository.deleteById(id);

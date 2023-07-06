@@ -2,34 +2,35 @@ package com.matias.argentinaprograma.service;
 
 import com.matias.argentinaprograma.config.exception.runtime.EntityNotFoundException;
 import com.matias.argentinaprograma.dto.request.DatosBasicosRequest;
-import com.matias.argentinaprograma.dto.response.DatosBasicosResponse;
-import com.matias.argentinaprograma.mapper.DatosBasicosMapper;
 import com.matias.argentinaprograma.model.DatosBasicosEntity;
 import com.matias.argentinaprograma.repository.IDatosBasicosRepository;
-import com.matias.argentinaprograma.service.abstraction.IDatosBasicosService;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DatosBasicosService implements IDatosBasicosService {
+public class DatosBasicosService {
 
   @Autowired
   private IDatosBasicosRepository datosBasicosRepository;
 
-  @Autowired
-  private DatosBasicosMapper datosBasicosMapper;
-
-  @Override
-  public DatosBasicosResponse getBy(Integer id) {
-    return datosBasicosMapper.toDatosBasicosResponse(findBy(id));
+  public DatosBasicosEntity getBy(Integer id) {
+    return findBy(id);
   }
 
-  @Override
-  public DatosBasicosResponse update(DatosBasicosRequest request, Integer id) {
+  public DatosBasicosEntity update(DatosBasicosRequest request, Integer id) {
     verifyExistence(id);
-    DatosBasicosEntity entity = datosBasicosMapper.toDatosBasicosEntity(request, id);
-    return datosBasicosMapper.toDatosBasicosResponse(datosBasicosRepository.save(entity));
+    DatosBasicosEntity entity = toDatosBasicosEntity(request, id);
+    return datosBasicosRepository.save(entity);
+  }
+
+  private DatosBasicosEntity toDatosBasicosEntity(DatosBasicosRequest request, Integer id) {
+    DatosBasicosEntity entity = new DatosBasicosEntity();
+    entity.setId(id);
+    entity.setNombre(request.getNombre());
+    entity.setTitulo(request.getTitulo());
+    entity.setImagen(request.getImagen());
+    return entity;
   }
 
   private void verifyExistence(Integer id) {

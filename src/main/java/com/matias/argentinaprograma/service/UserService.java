@@ -9,7 +9,6 @@ import com.matias.argentinaprograma.mapper.UserMapper;
 import com.matias.argentinaprograma.mapper.updater.UserUpdater;
 import com.matias.argentinaprograma.model.UserEntity;
 import com.matias.argentinaprograma.repository.IUserRepository;
-import com.matias.argentinaprograma.service.abstraction.IUserService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService implements UserDetailsService, IUserService {
+public class UserService implements UserDetailsService {
 
   @Autowired
   private IUserRepository userRepository;
@@ -33,7 +32,6 @@ public class UserService implements UserDetailsService, IUserService {
   @Autowired
   private UserUpdater userUpdater;
 
-  @Override
   public ListUsersResponse listActiveUsers() {
     List<UserEntity> listUserEntities = userRepository.findAllActiveUsers();
     ListUsersResponse listUsersResponse = new ListUsersResponse();
@@ -41,7 +39,6 @@ public class UserService implements UserDetailsService, IUserService {
     return listUsersResponse;
   }
 
-  @Override
   public UserResponse getUserAuthenticated() {
     return userMapper.toUserResponse((UserEntity) securityUtils.getUserAuthenticated());
   }
@@ -59,7 +56,6 @@ public class UserService implements UserDetailsService, IUserService {
     return userEntity;
   }
 
-  @Override
   public void delete(Integer id) {
     UserEntity userEntity = findBy(id);
     userEntity.setSoftDeleted(true);
@@ -75,7 +71,6 @@ public class UserService implements UserDetailsService, IUserService {
     return optionalUserEntity.get();
   }
 
-  @Override
   public void update(Integer id, UpdateUserRequest updateUserRequest) {
     UserEntity userEntity = findBy(id);
     UserEntity userUpdated = userUpdater.update(updateUserRequest, userEntity);
